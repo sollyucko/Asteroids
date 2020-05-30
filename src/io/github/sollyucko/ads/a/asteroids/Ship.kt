@@ -1,6 +1,6 @@
 package io.github.sollyucko.ads.a.asteroids
 
-import io.github.sollyucko.ads.a.asteroids.utils.AccelerationGameEntity
+import io.github.sollyucko.ads.a.asteroids.utils.RelatavisticGameEntity
 import io.github.sollyucko.ads.a.asteroids.utils.geometry.*
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
@@ -14,7 +14,7 @@ class Ship(anchor: Point, orientation: Orientation) :
                 Point(0.0, 5.0)
             ), anchor, orientation
         ),
-        AccelerationGameEntity,
+        RelatavisticGameEntity,
         KeyListener {
 
     private var forward: Boolean = false
@@ -43,9 +43,7 @@ class Ship(anchor: Point, orientation: Orientation) :
     }
 
     override fun tick(game: Asteroids) {
-        if (forward) {
-            super.tick(game)
-        }
+        super.tick(game)
         if (turnLeft) {
             rotate(-TURN_SPEED)
         }
@@ -57,13 +55,21 @@ class Ship(anchor: Point, orientation: Orientation) :
         }
     }
 
-    override var velocity: Vector = Vector.ZERO
+    override var rapidity: Vector = Vector.ZERO
 
     override val acceleration: Vector
-        get() = orientation.unitVector * ACCELERATION
+        get() = if (forward) {
+            orientation.unitVector * ACCELERATION
+        } else {
+            Vector.ZERO
+        }
+
+    override val maxSpeed: Double
+        get() = MAX_SPEED
 
     companion object {
         const val ACCELERATION = .15
+        const val MAX_SPEED = 3.0
         val TURN_SPEED = Rotation.fromDegrees(1.0)
     }
 }
