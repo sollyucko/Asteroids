@@ -1,6 +1,6 @@
 package io.github.sollyucko.ads.a.asteroids
 
-import io.github.sollyucko.ads.a.asteroids.utils.VelocityGameEntity
+import io.github.sollyucko.ads.a.asteroids.utils.physics.VelocityGameEntity
 import io.github.sollyucko.ads.a.asteroids.utils.geometry.*
 import io.github.sollyucko.ads.a.asteroids.utils.randomDoubleNear
 import kotlin.math.min
@@ -8,7 +8,7 @@ import kotlin.random.Random
 
 class Asteroid private constructor(shape: Array<Point>, anchor: Point, orientation: Orientation, val size: Double) :
         Polygon(shape, anchor, orientation),
-        VelocityGameEntity {
+        VelocityGameEntity<Asteroids> {
 
     override val velocity: Vector
         get() = orientation.unitVector * MOVEMENT_SPEED

@@ -1,7 +1,7 @@
 package io.github.sollyucko.ads.a.asteroids.utils
 
-import io.github.sollyucko.ads.a.asteroids.Asteroids
+import io.github.sollyucko.ads.a.asteroids.utils.geometry.Rectangular
 
-interface GameEntity {
-    fun tick(game: Asteroids)
+interface GameEntity<in G: Rectangular> {
+    fun tick(game: G)
 }

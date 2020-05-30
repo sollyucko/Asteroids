@@ -1,11 +1,11 @@
 package io.github.sollyucko.ads.a.asteroids
 
-import io.github.sollyucko.ads.a.asteroids.utils.VelocityGameEntity
+import io.github.sollyucko.ads.a.asteroids.utils.physics.VelocityGameEntity
 import io.github.sollyucko.ads.a.asteroids.utils.geometry.*
 
 class Bullet(center: Point, private var orientation: Orientation) :
         Circle(center, RADIUS),
-        VelocityGameEntity {
+        VelocityGameEntity<Asteroids> {
 
     override fun rotate(rotation: Rotation) {
         orientation += rotation

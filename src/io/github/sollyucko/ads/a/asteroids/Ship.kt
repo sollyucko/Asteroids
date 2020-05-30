@@ -1,7 +1,8 @@
 package io.github.sollyucko.ads.a.asteroids
 
-import io.github.sollyucko.ads.a.asteroids.utils.RelatavisticGameEntity
-import io.github.sollyucko.ads.a.asteroids.utils.RotatingGameEntity
+import io.github.sollyucko.ads.a.asteroids.utils.GameEntity
+import io.github.sollyucko.ads.a.asteroids.utils.physics.RelatavisticGameEntity
+import io.github.sollyucko.ads.a.asteroids.utils.physics.RotatingGameEntity
 import io.github.sollyucko.ads.a.asteroids.utils.geometry.*
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
@@ -16,8 +17,8 @@ class Ship(anchor: Point, orientation: Orientation) :
                 Point(0.0, 5.0)
             ), anchor, orientation
         ),
-        RelatavisticGameEntity,
-        RotatingGameEntity,
+        RelatavisticGameEntity<Asteroids>,
+        RotatingGameEntity<Asteroids>,
         KeyListener {
 
     private var forward: Boolean = false
