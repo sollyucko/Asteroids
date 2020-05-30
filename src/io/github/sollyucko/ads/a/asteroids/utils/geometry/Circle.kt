@@ -11,11 +11,11 @@ open class Circle(var center: Point, var radius: Double) : Shape, Paintable {
         }
 
     override fun contains(point: Point) =
-        (center - point).magnitude < radius
+        (center - point).magnitude <= radius
 
     override fun collidesWith(other: Shape): Boolean? =
         when(other) {
-            is Circle -> (center - other.center).magnitude < radius + other.radius
+            is Circle -> (center - other.center).magnitude <= radius + other.radius
             else -> null
         }
 
