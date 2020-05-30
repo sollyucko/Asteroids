@@ -30,6 +30,8 @@ data class Rotation private constructor(val radians: Double) {
         fromRadians(radians / other)
 
     companion object {
+        val ZERO = Rotation(0.0)
+
         fun fromRadians(radians: Double) = Rotation(radians)
         fun fromDegrees(degrees: Double) = Rotation(toRadians(degrees))
     }

@@ -1,9 +1,11 @@
 package io.github.sollyucko.ads.a.asteroids
 
 import io.github.sollyucko.ads.a.asteroids.utils.RelatavisticGameEntity
+import io.github.sollyucko.ads.a.asteroids.utils.RotatingGameEntity
 import io.github.sollyucko.ads.a.asteroids.utils.geometry.*
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
+import java.lang.RuntimeException
 
 class Ship(anchor: Point, orientation: Orientation) :
         Polygon(
@@ -15,6 +17,7 @@ class Ship(anchor: Point, orientation: Orientation) :
             ), anchor, orientation
         ),
         RelatavisticGameEntity,
+        RotatingGameEntity,
         KeyListener {
 
     private var forward: Boolean = false
@@ -43,13 +46,9 @@ class Ship(anchor: Point, orientation: Orientation) :
     }
 
     override fun tick(game: Asteroids) {
-        super.tick(game)
-        if (turnLeft) {
-            rotate(-TURN_SPEED)
-        }
-        if (turnRight) {
-            rotate(TURN_SPEED)
-        }
+        super<RelatavisticGameEntity>.tick(game)
+        super<RotatingGameEntity>.tick(game)
+
         if (firing) {
             game.addBullet(Bullet(anchor.copy(), orientation))
         }
@@ -66,6 +65,16 @@ class Ship(anchor: Point, orientation: Orientation) :
 
     override val maxSpeed: Double
         get() = MAX_SPEED
+
+    @Suppress("BooleanLiteralArgument")
+    override val rotationSpeed: Rotation
+        get() = when(Pair(turnLeft, turnRight)) {
+            Pair(false, false) -> Rotation.ZERO
+            Pair(false, true) -> TURN_SPEED
+            Pair(true, false) -> -TURN_SPEED
+            Pair(true, true) -> Rotation.ZERO
+            else -> throw RuntimeException("WTF?!")
+        }
 
     companion object {
         const val ACCELERATION = .15
