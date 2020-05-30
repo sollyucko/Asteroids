@@ -16,10 +16,10 @@ class Asteroid private constructor(shape: Array<Point>, anchor: Point, direction
 
     companion object {
         const val MOVEMENT_SPEED = 2.0
-        const val MAX_START_SIZE = 30.0
-        const val MIN_START_SIZE = 15.0
+        private const val MAX_START_SIZE = 30.0
+        private const val MIN_START_SIZE = 15.0
         const val MINIMUM_SIZE = 4.0
-        const val NUM_VERTICES = 5
+        private const val NUM_VERTICES = 5
 
         private fun generateShape(size: Double) =
             generateSequence {
@@ -38,15 +38,12 @@ class Asteroid private constructor(shape: Array<Point>, anchor: Point, direction
             )
 
         fun createRandom(bounds: Rectangular) =
-            createRandom(bounds, Random.nextDouble(MIN_START_SIZE, MAX_START_SIZE))
-
-        fun createRandom(bounds: Rectangular, size: Double) =
             createRandom(
                 Point(
                     Random.nextDouble(bounds.availWidth.toDouble()),
                     Random.nextDouble(bounds.availHeight.toDouble())
                 ),
-                size
+                Random.nextDouble(MIN_START_SIZE, MAX_START_SIZE)
             )
 
         fun createRandomNear(point: Point, bounds: Rectangular, size: Double) =

@@ -30,9 +30,9 @@ open class Polygon(
     init {
         // First, we find the shape's top-most left-most boundary, its origin.
         val origin = shape[0].copy()
-        for (p in shape) {
-            if (p.x < origin.x) origin.x = p.x
-            if (p.y < origin.y) origin.y = p.y
+        for ((x, y) in shape) {
+            if (x < origin.x) origin.x = x
+            if (y < origin.y) origin.y = y
         }
 
         // Then, we orient all of its points relative to the real origin.
@@ -62,14 +62,14 @@ open class Polygon(
             pointCache?.let { return it }
 
             val center = findCenter()
-            return shape.map { p ->
+            return shape.map { (x, y) ->
                 Point(
-                    (p.x - center.x) * cos(Math.toRadians(directionDegrees))
-                            - (p.y - center.y) * sin(Math.toRadians(directionDegrees))
+                    (x - center.x) * cos(Math.toRadians(directionDegrees))
+                            - (y - center.y) * sin(Math.toRadians(directionDegrees))
                             + center.x / 2
                             + anchor.x,
-                    (p.x - center.x) * sin(Math.toRadians(directionDegrees))
-                            + (p.y - center.y) * cos(Math.toRadians(directionDegrees))
+                    (x - center.x) * sin(Math.toRadians(directionDegrees))
+                            + (y - center.y) * cos(Math.toRadians(directionDegrees))
                             + center.y / 2
                             + anchor.y
                 )

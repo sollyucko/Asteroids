@@ -4,6 +4,7 @@ import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
 
+@Suppress("MemberVisibilityCanBePrivate")
 data class Vector(var x: Double, var y: Double) {
     operator fun plus(other: Vector) =
         Vector(x + other.x, y + other.y)
@@ -16,15 +17,14 @@ data class Vector(var x: Double, var y: Double) {
 
     val magnitude = x * x + y * y
     val angleRadians = atan2(y, x)
-    val angleDegrees = Math.toDegrees(angleRadians)
 
     fun rotated(rotationDegrees: Double): Vector {
         val magnitude = magnitude
-        val angleDegrees = angleRadians + Math.toRadians(rotationDegrees)
+        val newAngleDegrees = angleRadians + Math.toRadians(rotationDegrees)
         return Vector(
             magnitude * cos(
-                angleDegrees
-            ), magnitude * sin(angleDegrees)
+                newAngleDegrees
+            ), magnitude * sin(newAngleDegrees)
         )
     }
 }

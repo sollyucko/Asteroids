@@ -1,10 +1,8 @@
 package io.github.sollyucko.ads.a.asteroids
 
-import io.github.sollyucko.ads.a.asteroids.utils.GameEntity
 import io.github.sollyucko.ads.a.asteroids.utils.InertialGameEntity
 import io.github.sollyucko.ads.a.asteroids.utils.geometry.Point
 import io.github.sollyucko.ads.a.asteroids.utils.geometry.Polygon
-import io.github.sollyucko.ads.a.asteroids.utils.geometry.Vector
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 
