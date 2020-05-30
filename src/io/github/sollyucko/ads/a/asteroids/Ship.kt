@@ -1,6 +1,6 @@
 package io.github.sollyucko.ads.a.asteroids
 
-import io.github.sollyucko.ads.a.asteroids.utils.VelocityGameEntity
+import io.github.sollyucko.ads.a.asteroids.utils.AccelerationGameEntity
 import io.github.sollyucko.ads.a.asteroids.utils.geometry.*
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
@@ -14,7 +14,7 @@ class Ship(anchor: Point, orientation: Orientation) :
                 Point(0.0, 5.0)
             ), anchor, orientation
         ),
-        VelocityGameEntity,
+        AccelerationGameEntity,
         KeyListener {
 
     private var forward: Boolean = false
@@ -57,11 +57,13 @@ class Ship(anchor: Point, orientation: Orientation) :
         }
     }
 
-    override val velocity: Vector
-        get() = orientation.unitVector * MOVEMENT_SPEED
+    override var velocity: Vector = Vector.ZERO
+
+    override val acceleration: Vector
+        get() = orientation.unitVector * ACCELERATION
 
     companion object {
-        const val MOVEMENT_SPEED = 1.5
+        const val ACCELERATION = .15
         val TURN_SPEED = Rotation.fromDegrees(1.0)
     }
 }

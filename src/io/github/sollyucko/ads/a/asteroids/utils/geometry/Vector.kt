@@ -24,5 +24,6 @@ data class Vector(var x: Double, var y: Double) {
         val UP = Vector(0.0, 1.0)
         val LEFT = Vector(-1.0, 0.0)
         val DOWN = Vector(0.0, -1.0)
+        val ZERO = Vector(0.0, 0.0)
     }
 }
