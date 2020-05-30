@@ -1,18 +1,20 @@
 package io.github.sollyucko.ads.a.asteroids
 
 import io.github.sollyucko.ads.a.asteroids.utils.InertialGameEntity
+import io.github.sollyucko.ads.a.asteroids.utils.geometry.Orientation
 import io.github.sollyucko.ads.a.asteroids.utils.geometry.Point
 import io.github.sollyucko.ads.a.asteroids.utils.geometry.Polygon
+import io.github.sollyucko.ads.a.asteroids.utils.geometry.Rotation
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 
-class Ship(anchor: Point, rotation: Double) :
+class Ship(anchor: Point, orientation: Orientation) :
         Polygon(arrayOf(
             Point(10.0, 0.0),
             Point(0.0, -5.0),
             Point(5.0, 0.0),
             Point(0.0, 5.0)
-        ), anchor, rotation),
+        ), anchor, orientation),
         InertialGameEntity,
         KeyListener {
 
@@ -52,7 +54,7 @@ class Ship(anchor: Point, rotation: Double) :
             rotate(TURN_SPEED)
         }
         if(firing) {
-            game.addBullet(Bullet(anchor.copy(), directionDegrees))
+            game.addBullet(Bullet(anchor.copy(), orientation))
         }
     }
 
@@ -61,6 +63,6 @@ class Ship(anchor: Point, rotation: Double) :
 
     companion object {
         const val MOVEMENT_SPEED = 1.5
-        const val TURN_SPEED = 1.0
+        val TURN_SPEED = Rotation.fromDegrees(1.0)
     }
 }

@@ -1,13 +1,10 @@
 package io.github.sollyucko.ads.a.asteroids.utils.geometry
 
 import io.github.sollyucko.ads.a.asteroids.utils.Paintable
-import io.github.sollyucko.ads.a.asteroids.utils.mod
 import io.github.sollyucko.ads.a.asteroids.utils.zipWithNextWrapping
 import java.awt.Graphics
 import kotlin.math.abs
 import kotlin.math.absoluteValue
-import kotlin.math.cos
-import kotlin.math.sin
 
 /**
 CLASS: Polygon
@@ -25,7 +22,7 @@ NOTE: You don't need to worry about the "magic math" details.
 open class Polygon(
     private val shape: Array<Point>,
     anchor: Point,
-    directionDegrees: Double // Zero degrees is left.
+    orientation: Orientation
 ) : Shape, Paintable {
     init {
         // First, we find the shape's top-most left-most boundary, its origin.
@@ -48,7 +45,7 @@ open class Polygon(
             pointCache = null
         }
 
-    var directionDegrees = directionDegrees
+    var orientation = orientation
         set(value) {
             field = value
             pointCache = null
@@ -64,14 +61,8 @@ open class Polygon(
             val center = findCenter()
             return shape.map { (x, y) ->
                 Point(
-                    (x - center.x) * cos(Math.toRadians(directionDegrees))
-                            - (y - center.y) * sin(Math.toRadians(directionDegrees))
-                            + center.x / 2
-                            + anchor.x,
-                    (x - center.x) * sin(Math.toRadians(directionDegrees))
-                            + (y - center.y) * cos(Math.toRadians(directionDegrees))
-                            + center.y / 2
-                            + anchor.y
+                    (x - center.x) * orientation.x - (y - center.y) * orientation.y + center.x / 2 + anchor.x,
+                    (x - center.x) * orientation.y + (y - center.y) * orientation.x + center.y / 2 + anchor.y
                 )
             }.toTypedArray()
         }
@@ -90,8 +81,8 @@ open class Polygon(
     override fun collidesWith(other: Shape): Boolean? =
         points.any { it in other }
 
-    override fun rotate(degrees: Double) {
-        directionDegrees = mod(directionDegrees + degrees, 360.0)
+    override fun rotate(rotation: Rotation) {
+        orientation += rotation
     }
 
     override fun paint(brush: Graphics) {

@@ -2,14 +2,16 @@ package io.github.sollyucko.ads.a.asteroids
 
 import io.github.sollyucko.ads.a.asteroids.utils.InertialGameEntity
 import io.github.sollyucko.ads.a.asteroids.utils.geometry.Circle
+import io.github.sollyucko.ads.a.asteroids.utils.geometry.Orientation
 import io.github.sollyucko.ads.a.asteroids.utils.geometry.Point
+import io.github.sollyucko.ads.a.asteroids.utils.geometry.Rotation
 
-class Bullet(center: Point, override var directionDegrees: Double) :
+class Bullet(center: Point, override var orientation: Orientation) :
         Circle(center, RADIUS),
         InertialGameEntity {
 
-    override fun rotate(degrees: Double) {
-        directionDegrees += degrees
+    override fun rotate(rotation: Rotation) {
+        orientation += rotation
     }
 
     override val movementSpeed

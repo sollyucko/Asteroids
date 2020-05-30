@@ -7,7 +7,7 @@ interface Shape {
 
     fun collidesWith(other: Shape): Boolean?
 
-    fun rotate(degrees: Double)
+    fun rotate(rotation: Rotation)
     
     fun translate(vector: Vector) {
         anchor += vector

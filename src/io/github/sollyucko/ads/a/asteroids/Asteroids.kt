@@ -2,6 +2,7 @@ package io.github.sollyucko.ads.a.asteroids
 
 import io.github.sollyucko.ads.a.asteroids.utils.GameCanvas
 import io.github.sollyucko.ads.a.asteroids.utils.assign
+import io.github.sollyucko.ads.a.asteroids.utils.geometry.Orientation
 import io.github.sollyucko.ads.a.asteroids.utils.geometry.Point
 import io.github.sollyucko.ads.a.asteroids.utils.geometry.Shape.Companion.collide
 import io.github.sollyucko.ads.a.asteroids.utils.sleep
@@ -21,7 +22,7 @@ class Asteroids : GameCanvas("Asteroids!", 800, 600) {
             (availWidth / 2).toDouble(),
             (availHeight / 2).toDouble()
         ),
-        0.0
+        Orientation.RIGHT
     )
     private val asteroids = generateSequence { Asteroid.createRandom(this) }.take(NUM_ASTEROIDS).toMutableList()
     private var bullets = mutableListOf<Bullet>()

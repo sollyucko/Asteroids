@@ -19,7 +19,7 @@ open class Circle(var center: Point, var radius: Double) : Shape, Paintable {
             else -> null
         }
 
-    override fun rotate(degrees: Double) {
+    override fun rotate(rotation: Rotation) {
         // Does nothing
     }
 

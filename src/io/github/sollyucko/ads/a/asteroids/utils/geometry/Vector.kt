@@ -1,9 +1,5 @@
 package io.github.sollyucko.ads.a.asteroids.utils.geometry
 
-import kotlin.math.atan2
-import kotlin.math.cos
-import kotlin.math.sin
-
 @Suppress("MemberVisibilityCanBePrivate")
 data class Vector(var x: Double, var y: Double) {
     operator fun plus(other: Vector) =
@@ -16,15 +12,17 @@ data class Vector(var x: Double, var y: Double) {
         Vector(x * other, y * other)
 
     val magnitude = x * x + y * y
-    val angleRadians = atan2(y, x)
+    val orientation = Orientation.fromXY(x, y)
 
-    fun rotated(rotationDegrees: Double): Vector {
-        val magnitude = magnitude
-        val newAngleDegrees = angleRadians + Math.toRadians(rotationDegrees)
-        return Vector(
-            magnitude * cos(
-                newAngleDegrees
-            ), magnitude * sin(newAngleDegrees)
-        )
+    fun rotated(rotation: Rotation): Vector {
+        return (orientation + rotation).unitVector * magnitude
+    }
+
+    @Suppress("unused")
+    companion object {
+        val RIGHT = Vector(1.0, 0.0)
+        val UP = Vector(0.0, 1.0)
+        val LEFT = Vector(-1.0, 0.0)
+        val DOWN = Vector(0.0, -1.0)
     }
 }
