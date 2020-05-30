@@ -5,6 +5,8 @@ import java.awt.Canvas
 import java.awt.Frame
 import java.awt.Graphics
 import java.awt.Image
+import java.awt.event.ComponentEvent
+import java.awt.event.ComponentListener
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
 import kotlin.system.exitProcess
@@ -47,7 +49,6 @@ abstract class GameCanvas(
         frame.add(this)
         frame.setSize(canvasWidth, canvasHeight)
         frame.isVisible = true
-        frame.isResizable = false
         frame.addWindowListener(object : WindowAdapter() {
             override fun windowClosing(e: WindowEvent) {
                 exitProcess(0)
@@ -55,5 +56,16 @@ abstract class GameCanvas(
         })
         @Suppress("LeakingThis")
         buffer = createImage(canvasWidth, canvasHeight)
+        frame.addComponentListener(object : ComponentListener {
+            override fun componentMoved(e: ComponentEvent?) {}
+
+            override fun componentResized(e: ComponentEvent?) {
+                buffer = createImage(frame.width, frame.height)
+            }
+
+            override fun componentHidden(e: ComponentEvent?) {}
+
+            override fun componentShown(e: ComponentEvent?) {}
+        })
     }
 }
