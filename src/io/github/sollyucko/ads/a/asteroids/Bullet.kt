@@ -1,21 +1,18 @@
 package io.github.sollyucko.ads.a.asteroids
 
-import io.github.sollyucko.ads.a.asteroids.utils.InertialGameEntity
-import io.github.sollyucko.ads.a.asteroids.utils.geometry.Circle
-import io.github.sollyucko.ads.a.asteroids.utils.geometry.Orientation
-import io.github.sollyucko.ads.a.asteroids.utils.geometry.Point
-import io.github.sollyucko.ads.a.asteroids.utils.geometry.Rotation
+import io.github.sollyucko.ads.a.asteroids.utils.VelocityGameEntity
+import io.github.sollyucko.ads.a.asteroids.utils.geometry.*
 
-class Bullet(center: Point, override var orientation: Orientation) :
+class Bullet(center: Point, private var orientation: Orientation) :
         Circle(center, RADIUS),
-        InertialGameEntity {
+        VelocityGameEntity {
 
     override fun rotate(rotation: Rotation) {
         orientation += rotation
     }
 
-    override val movementSpeed
-        get() = MOVEMENT_SPEED
+    override val velocity: Vector
+        get() = orientation.unitVector * MOVEMENT_SPEED
 
     companion object {
         const val RADIUS = 2.0

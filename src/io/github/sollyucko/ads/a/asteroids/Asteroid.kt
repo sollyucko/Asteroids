@@ -1,19 +1,17 @@
 package io.github.sollyucko.ads.a.asteroids
 
-import io.github.sollyucko.ads.a.asteroids.utils.InertialGameEntity
-import io.github.sollyucko.ads.a.asteroids.utils.geometry.Orientation
-import io.github.sollyucko.ads.a.asteroids.utils.geometry.Point
-import io.github.sollyucko.ads.a.asteroids.utils.geometry.Polygon
-import io.github.sollyucko.ads.a.asteroids.utils.geometry.Rectangular
+import io.github.sollyucko.ads.a.asteroids.utils.VelocityGameEntity
+import io.github.sollyucko.ads.a.asteroids.utils.geometry.*
 import io.github.sollyucko.ads.a.asteroids.utils.randomDoubleNear
 import kotlin.math.min
 import kotlin.random.Random
 
 class Asteroid private constructor(shape: Array<Point>, anchor: Point, orientation: Orientation, val size: Double) :
         Polygon(shape, anchor, orientation),
-        InertialGameEntity {
-    override val movementSpeed: Double
-        get() = MOVEMENT_SPEED
+        VelocityGameEntity {
+
+    override val velocity: Vector
+        get() = orientation.unitVector * MOVEMENT_SPEED
 
     companion object {
         const val MOVEMENT_SPEED = 2.0

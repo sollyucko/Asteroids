@@ -1,21 +1,20 @@
 package io.github.sollyucko.ads.a.asteroids
 
-import io.github.sollyucko.ads.a.asteroids.utils.InertialGameEntity
-import io.github.sollyucko.ads.a.asteroids.utils.geometry.Orientation
-import io.github.sollyucko.ads.a.asteroids.utils.geometry.Point
-import io.github.sollyucko.ads.a.asteroids.utils.geometry.Polygon
-import io.github.sollyucko.ads.a.asteroids.utils.geometry.Rotation
+import io.github.sollyucko.ads.a.asteroids.utils.VelocityGameEntity
+import io.github.sollyucko.ads.a.asteroids.utils.geometry.*
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 
 class Ship(anchor: Point, orientation: Orientation) :
-        Polygon(arrayOf(
-            Point(10.0, 0.0),
-            Point(0.0, -5.0),
-            Point(5.0, 0.0),
-            Point(0.0, 5.0)
-        ), anchor, orientation),
-        InertialGameEntity,
+        Polygon(
+            arrayOf(
+                Point(10.0, 0.0),
+                Point(0.0, -5.0),
+                Point(5.0, 0.0),
+                Point(0.0, 5.0)
+            ), anchor, orientation
+        ),
+        VelocityGameEntity,
         KeyListener {
 
     private var forward: Boolean = false
@@ -53,13 +52,13 @@ class Ship(anchor: Point, orientation: Orientation) :
         if (turnRight) {
             rotate(TURN_SPEED)
         }
-        if(firing) {
+        if (firing) {
             game.addBullet(Bullet(anchor.copy(), orientation))
         }
     }
 
-    override val movementSpeed: Double
-        get() = MOVEMENT_SPEED
+    override val velocity: Vector
+        get() = orientation.unitVector * MOVEMENT_SPEED
 
     companion object {
         const val MOVEMENT_SPEED = 1.5
