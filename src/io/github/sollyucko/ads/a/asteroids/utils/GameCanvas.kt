@@ -9,6 +9,7 @@ import java.awt.event.ComponentEvent
 import java.awt.event.ComponentListener
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
+import kotlin.math.max
 import kotlin.system.exitProcess
 
 /*
@@ -30,9 +31,11 @@ abstract class GameCanvas(
     to avoid a choppy painting experience if repainted in pieces.
      */
     override fun update(brush: Graphics) {
+        val startTimeNano = System.nanoTime()
         paint(buffer.graphics)
         brush.drawImage(buffer, 0, 0, this)
-        sleep(10)
+        val endTimeNano = System.nanoTime()
+        sleep(max(10 - (endTimeNano - startTimeNano) / 1000000, 0))
         repaint()
     }
 
