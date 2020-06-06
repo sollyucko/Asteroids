@@ -1,9 +1,7 @@
 package io.github.sollyucko.ads.a.asteroids
 
-import io.github.sollyucko.ads.a.asteroids.utils.physics.VelocityGameEntity
 import io.github.sollyucko.ads.a.asteroids.utils.geometry.*
-import io.github.sollyucko.ads.a.asteroids.utils.randomDoubleNear
-import kotlin.math.min
+import io.github.sollyucko.ads.a.asteroids.utils.physics.VelocityGameEntity
 import kotlin.random.Random
 
 class Asteroid private constructor(shape: Array<Point>, anchor: Point, orientation: Orientation, val size: Double) :
@@ -38,19 +36,13 @@ class Asteroid private constructor(shape: Array<Point>, anchor: Point, orientati
 
         fun createRandom(bounds: Rectangular) =
             createRandom(
-                Point(
-                    Random.nextDouble(bounds.availWidth.toDouble()),
-                    Random.nextDouble(bounds.availHeight.toDouble())
-                ),
+                Point.createRandom(bounds),
                 Random.nextDouble(MIN_START_SIZE, MAX_START_SIZE)
             )
 
         fun createRandomNear(point: Point, bounds: Rectangular, size: Double) =
             createRandom(
-                Point(
-                    randomDoubleNear(point.x, min(point.x, bounds.availWidth - point.x)),
-                    randomDoubleNear(point.y, min(point.y, bounds.availHeight - point.y))
-                ),
+                Point.createRandomNear(point, bounds),
                 size
             )
     }
