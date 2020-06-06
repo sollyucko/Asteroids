@@ -55,7 +55,7 @@ class Asteroids : GameCanvas("Asteroids!", 800, 600) {
                         asteroids.add(Asteroid.createRandomNear(asteroid.anchor, this, asteroid.size / 2.0))
                         asteroids.add(Asteroid.createRandomNear(asteroid.anchor, this, asteroid.size / 2.0))
                     } else {
-                        if(Random.nextInt(4) == 0) {
+                        if(Random.nextInt(2) == 0) {
                             asteroids.add(Asteroid.createRandomOnBorder(this))
                         }
                     }
