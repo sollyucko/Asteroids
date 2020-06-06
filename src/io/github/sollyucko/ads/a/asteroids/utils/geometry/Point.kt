@@ -23,5 +23,26 @@ data class Point(var x: Double, var y: Double) {
                 randomDoubleNear(point.x, min(point.x, bounds.availWidth - point.x)),
                 randomDoubleNear(point.y, min(point.y, bounds.availHeight - point.y))
             )
+
+        fun createRandomOnBorder(bounds: Rectangular) =
+            when (Random.nextInt(4)) {
+                0 -> Point(
+                    0.0,
+                    Random.nextDouble(bounds.availWidth.toDouble())
+                )
+                1 -> Point(
+                    Random.nextDouble(bounds.availHeight.toDouble()),
+                    0.0
+                )
+                2 -> Point(
+                    bounds.availHeight.toDouble(),
+                    Random.nextDouble(bounds.availWidth.toDouble())
+                )
+                3 -> Point(
+                    Random.nextDouble(bounds.availWidth.toDouble()),
+                    bounds.availWidth.toDouble()
+                )
+                else -> throw RuntimeException("Random is broken")
+            }
     }
 }
