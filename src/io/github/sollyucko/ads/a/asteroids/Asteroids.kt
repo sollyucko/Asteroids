@@ -8,6 +8,7 @@ import io.github.sollyucko.ads.a.asteroids.utils.geometry.Shape.Companion.collid
 import io.github.sollyucko.ads.a.asteroids.utils.sleep
 import java.awt.Color
 import java.awt.Graphics
+import kotlin.math.roundToInt
 import kotlin.system.exitProcess
 
 /*
@@ -26,6 +27,7 @@ class Asteroids : GameCanvas("Asteroids!", 800, 600) {
     )
     private val asteroids = generateSequence { Asteroid.createRandom(this) }.take(NUM_ASTEROIDS).toMutableList()
     private var bullets = mutableListOf<Bullet>()
+    private var score: Int = 0
 
     init {
         isFocusable = true
@@ -38,6 +40,7 @@ class Asteroids : GameCanvas("Asteroids!", 800, 600) {
         brush.fillRect(0, 0, availWidth, availHeight)
 
         brush.color = Color.white
+        brush.drawString(score.toString(), 0, brush.font.size)
 
         ship.tick(this)
         ship.paint(brush)
@@ -47,6 +50,7 @@ class Asteroids : GameCanvas("Asteroids!", 800, 600) {
                 if (collide(bullet, asteroid)) {
                     asteroids.remove(asteroid)
                     if (asteroid.size > Asteroid.MINIMUM_SIZE) {
+                        score += (asteroid.size * asteroid.size).roundToInt()
                         asteroids.add(Asteroid.createRandomNear(asteroid.anchor, this, asteroid.size / 2.0))
                         asteroids.add(Asteroid.createRandomNear(asteroid.anchor, this, asteroid.size / 2.0))
                     }
