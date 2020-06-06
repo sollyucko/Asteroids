@@ -27,20 +27,20 @@ data class Point(var x: Double, var y: Double) {
         fun createRandomOnBorder(bounds: Rectangular) =
             when (Random.nextInt(4)) {
                 0 -> Point(
-                    0.0,
-                    Random.nextDouble(bounds.availWidth.toDouble())
-                )
-                1 -> Point(
-                    Random.nextDouble(bounds.availHeight.toDouble()),
+                    Random.nextDouble(bounds.availWidth.toDouble()),
                     0.0
                 )
+                1 -> Point(
+                    0.0,
+                    Random.nextDouble(bounds.availHeight.toDouble())
+                )
                 2 -> Point(
-                    bounds.availHeight.toDouble(),
-                    Random.nextDouble(bounds.availWidth.toDouble())
+                    Random.nextDouble(bounds.availWidth.toDouble()),
+                    bounds.availHeight.toDouble()
                 )
                 3 -> Point(
-                    Random.nextDouble(bounds.availWidth.toDouble()),
-                    bounds.availWidth.toDouble()
+                    bounds.availWidth.toDouble(),
+                    Random.nextDouble(bounds.availHeight.toDouble())
                 )
                 else -> throw RuntimeException("Random is broken")
             }
