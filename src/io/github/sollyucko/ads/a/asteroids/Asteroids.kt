@@ -9,6 +9,7 @@ import io.github.sollyucko.ads.a.asteroids.utils.sleep
 import java.awt.Color
 import java.awt.Graphics
 import kotlin.math.roundToInt
+import kotlin.random.Random
 import kotlin.system.exitProcess
 
 /*
@@ -54,7 +55,9 @@ class Asteroids : GameCanvas("Asteroids!", 800, 600) {
                         asteroids.add(Asteroid.createRandomNear(asteroid.anchor, this, asteroid.size / 2.0))
                         asteroids.add(Asteroid.createRandomNear(asteroid.anchor, this, asteroid.size / 2.0))
                     } else {
-                        asteroids.add(Asteroid.createRandomOnBorder(this))
+                        if(Random.nextInt(4) == 0) {
+                            asteroids.add(Asteroid.createRandomOnBorder(this))
+                        }
                     }
                     return@filter false
                 }
