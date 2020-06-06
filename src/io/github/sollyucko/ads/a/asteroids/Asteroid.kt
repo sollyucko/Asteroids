@@ -17,7 +17,7 @@ class Asteroid private constructor(shape: Array<Point>, anchor: Point, orientati
         const val MOVEMENT_SPEED = 2.0
         private const val MAX_START_SIZE = 30.0
         private const val MIN_START_SIZE = 15.0
-        const val MINIMUM_SIZE = 4.0
+        const val MINIMUM_SIZE = 10.0
         private const val NUM_VERTICES = 5
 
         private fun generateShape(size: Double) =
