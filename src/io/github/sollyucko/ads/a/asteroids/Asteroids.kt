@@ -71,6 +71,7 @@ class Asteroids : GameCanvas("Asteroids!", 800, 600) {
         for (asteroid in asteroids) {
             if (collide(ship, asteroid)) {
                 println("You lost!")
+                println("Final score: $score")
                 exitProcess(0) // TODO: improve this
             }
 
@@ -80,6 +81,7 @@ class Asteroids : GameCanvas("Asteroids!", 800, 600) {
 
         if (asteroids.isEmpty()) {
             println("You won!")
+            println("Final score: $score")
             exitProcess(0) // TODO: improve this
         }
     }
