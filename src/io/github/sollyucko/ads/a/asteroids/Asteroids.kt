@@ -27,7 +27,7 @@ class Asteroids : GameCanvas("Asteroids!", 800, 600) {
         Orientation.RIGHT
     )
     private val bullets = mutableListOf<Bullet>()
-    private val enemy = Enemy()
+    private var enemy: Enemy? = Enemy()
     private val enemyBullets = mutableListOf<Bullet>()
     private val asteroids = generateSequence { Asteroid.createRandom(this) }.take(NUM_ASTEROIDS).toMutableList()
     private var score: Int = 0
@@ -48,10 +48,20 @@ class Asteroids : GameCanvas("Asteroids!", 800, 600) {
         ship.tick(this)
         ship.paint(brush)
 
-        enemy.tick(this)
-        enemy.paint(brush)
+        enemy?.tick(this)
+        enemy?.paint(brush)
 
         bullets.assign(bullets.filter { bullet ->
+            enemy?.let {
+                if (collide(bullet, it)) {
+                    it.hp -= 1
+                    if (it.hp <= 0) {
+                        enemy = null
+                    }
+                    return@filter false
+                }
+            }
+
             for (asteroid in asteroids) {
                 if (collide(bullet, asteroid)) {
                     asteroids.remove(asteroid)
@@ -91,7 +101,7 @@ class Asteroids : GameCanvas("Asteroids!", 800, 600) {
             asteroid.paint(brush)
         }
 
-        if (asteroids.isEmpty()) {
+        if (enemy == null && asteroids.isEmpty()) {
             endGame(win = true)
         }
     }

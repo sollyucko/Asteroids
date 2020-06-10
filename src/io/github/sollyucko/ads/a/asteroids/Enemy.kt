@@ -10,7 +10,10 @@ class Enemy : Circle(Point(RADIUS*2, RADIUS*2), RADIUS), GameEntity<Asteroids> {
         game.addEnemyBullet(Bullet(center, orientation))
     }
 
+    var hp = START_HP
+
     companion object {
         const val RADIUS = 20.0
+        const val START_HP = 10
     }
 }
