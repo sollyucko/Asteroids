@@ -5,9 +5,9 @@ import io.github.sollyucko.ads.a.asteroids.utils.geometry.Circle
 import io.github.sollyucko.ads.a.asteroids.utils.geometry.Point
 import kotlin.random.Random
 
-class Enemy : Circle(Point(RADIUS*2, RADIUS*2), RADIUS), GameEntity<Asteroids> {
+class Enemy : Circle(Point(RADIUS * 2, RADIUS * 2), RADIUS), GameEntity<Asteroids> {
     override fun tick(game: Asteroids) {
-        if(Random.nextInt(START_HP) < hp) {
+        if (Random.nextInt(START_HP) < hp) {
             val orientation = (game.getPlayerPosition() - anchor).orientation
             game.addEnemyBullet(Bullet(center, orientation))
         }

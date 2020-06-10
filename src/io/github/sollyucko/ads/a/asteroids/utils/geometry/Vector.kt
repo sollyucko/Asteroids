@@ -14,10 +14,6 @@ data class Vector(var x: Double, var y: Double) {
     val magnitude = x * x + y * y
     val orientation = Orientation.fromXY(x, y)
 
-    fun rotated(rotation: Rotation): Vector {
-        return (orientation + rotation).unitVector * magnitude
-    }
-
     @Suppress("unused")
     companion object {
         val RIGHT = Vector(1.0, 0.0)

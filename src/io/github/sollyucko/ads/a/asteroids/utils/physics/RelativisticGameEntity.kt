@@ -5,7 +5,7 @@ import io.github.sollyucko.ads.a.asteroids.utils.geometry.Vector
 import kotlin.math.tanh
 
 /** Soft speed cap. */
-interface RelatavisticGameEntity<in G: Rectangular>: VelocityGameEntity<G> {
+interface RelativisticGameEntity<in G : Rectangular> : VelocityGameEntity<G> {
     var rapidity: Vector
     val maxSpeed: Double
     val acceleration: Vector

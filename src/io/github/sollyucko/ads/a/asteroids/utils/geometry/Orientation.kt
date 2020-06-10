@@ -34,17 +34,17 @@ data class Orientation private constructor(internal val radians: Double) {
 
     companion object {
         val RIGHT = fromRadians(0.0)
-        val UP = fromRadians(PI/2)
+        val UP = fromRadians(PI / 2)
         val LEFT = fromRadians(PI)
-        val DOWN = fromRadians(3*PI/2)
+        val DOWN = fromRadians(3 * PI / 2)
 
         fun fromXY(x: Double, y: Double) =
             fromRadians(atan2(y, x))
 
         internal fun fromRadians(radians: Double) =
-            Orientation(mod(radians, 2*PI))
+            Orientation(mod(radians, 2 * PI))
 
         fun createRandom() =
-            fromRadians(Random.nextDouble(2*PI))
+            fromRadians(Random.nextDouble(2 * PI))
     }
 }

@@ -14,7 +14,7 @@ open class Circle(var center: Point, var radius: Double) : Shape, Paintable {
         (center - point).magnitude <= radius
 
     override fun collidesWith(other: Shape): Boolean? =
-        when(other) {
+        when (other) {
             is Circle -> (center - other.center).magnitude <= radius + other.radius
             else -> null
         }
@@ -24,6 +24,11 @@ open class Circle(var center: Point, var radius: Double) : Shape, Paintable {
     }
 
     override fun paint(brush: Graphics) {
-        brush.fillOval((center.x - radius).toInt(), (center.y - radius).toInt(), (2*radius).toInt(), (2*radius).toInt())
+        brush.fillOval(
+            (center.x - radius).toInt(),
+            (center.y - radius).toInt(),
+            (2 * radius).toInt(),
+            (2 * radius).toInt()
+        )
     }
 }

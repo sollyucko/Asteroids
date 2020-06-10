@@ -1,7 +1,7 @@
 package io.github.sollyucko.ads.a.asteroids
 
-import io.github.sollyucko.ads.a.asteroids.utils.physics.VelocityGameEntity
 import io.github.sollyucko.ads.a.asteroids.utils.geometry.*
+import io.github.sollyucko.ads.a.asteroids.utils.physics.VelocityGameEntity
 
 class Bullet(center: Point, private var orientation: Orientation) :
         Circle(center, RADIUS),

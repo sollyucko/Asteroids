@@ -47,12 +47,12 @@ class Asteroid private constructor(shape: Array<Point>, anchor: Point, orientati
             )
 
         fun createRandomOnBorder(bounds: Rectangular) =
-            createRandom(
-                Point.createRandomOnBorder(bounds),
+            createRandomOnBorder(
+                bounds,
                 Random.nextDouble(MIN_START_SIZE, MAX_START_SIZE)
             )
 
-        fun createRandomOnBorder(bounds: Rectangular, size: Double) =
+        private fun createRandomOnBorder(bounds: Rectangular, size: Double) =
             createRandom(
                 Point.createRandomOnBorder(bounds),
                 size

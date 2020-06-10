@@ -8,10 +8,11 @@ interface Shape {
     fun collidesWith(other: Shape): Boolean?
 
     fun rotate(rotation: Rotation)
-    
+
     fun translate(vector: Vector) {
         anchor += vector
     }
+
     fun translate(vector: Vector, bounds: Rectangular) {
         translate(vector)
 
@@ -27,7 +28,7 @@ interface Shape {
             anchor.y -= bounds.availHeight
         }
     }
-    
+
 
     companion object {
         fun collide(a: Shape, b: Shape): Boolean =

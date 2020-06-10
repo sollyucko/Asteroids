@@ -5,7 +5,7 @@ import io.github.sollyucko.ads.a.asteroids.utils.geometry.Orientation
 import io.github.sollyucko.ads.a.asteroids.utils.geometry.Rectangular
 import io.github.sollyucko.ads.a.asteroids.utils.geometry.Rotation
 
-interface RotatingGameEntity<in G: Rectangular>: GameEntity<G> {
+interface RotatingGameEntity<in G : Rectangular> : GameEntity<G> {
     val rotationSpeed: Rotation
     var orientation: Orientation
 

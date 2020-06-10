@@ -20,4 +20,4 @@ fun <T> MutableList<T>.assign(from: Iterable<T>) {
 }
 
 fun randomDoubleNear(x: Double, maxDist: Double) =
-    x + Random.nextDouble((maxDist).pow(1/10)).pow(10)
+    x + Random.nextDouble((maxDist).pow(1 / 10)).pow(10)
