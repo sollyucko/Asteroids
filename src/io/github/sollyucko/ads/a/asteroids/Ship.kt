@@ -77,9 +77,12 @@ class Ship(anchor: Point, orientation: Orientation) :
             else -> throw RuntimeException("WTF?!")
         }
 
+    var hp = START_HP
+
     companion object {
         const val ACCELERATION = .15
         const val MAX_SPEED = 3.0
         val TURN_SPEED = Rotation.fromDegrees(2.0)
+        const val START_HP = 3
     }
 }

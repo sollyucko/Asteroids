@@ -85,7 +85,7 @@ class Asteroids : GameCanvas("Asteroids!", 800, 600) {
 
         for (bullet in enemyBullets) {
             if (collide(ship, bullet)) {
-                endGame(win = false)
+                shipHit()
             }
 
             bullet.tick(this)
@@ -94,7 +94,7 @@ class Asteroids : GameCanvas("Asteroids!", 800, 600) {
 
         for (asteroid in asteroids) {
             if (collide(ship, asteroid)) {
-                endGame(win = false)
+                shipHit()
             }
 
             asteroid.tick(this)
@@ -114,6 +114,13 @@ class Asteroids : GameCanvas("Asteroids!", 800, 600) {
         }
         println("Final score: $score")
         exitProcess(0) // TODO: improve this
+    }
+
+    private fun shipHit() {
+        ship.hp -= 1
+        if (ship.hp <= 0) {
+            endGame(win = false)
+        }
     }
 
     fun addBullet(bullet: Bullet) {
