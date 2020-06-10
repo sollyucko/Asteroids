@@ -24,6 +24,6 @@ open class Circle(var center: Point, var radius: Double) : Shape, Paintable {
     }
 
     override fun paint(brush: Graphics) {
-        brush.fillOval(center.x.toInt(), center.y.toInt(), (2*radius).toInt(), (2*radius).toInt())
+        brush.fillOval((center.x - radius).toInt(), (center.y - radius).toInt(), (2*radius).toInt(), (2*radius).toInt())
     }
 }
