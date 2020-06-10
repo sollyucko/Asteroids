@@ -80,6 +80,6 @@ class Ship(anchor: Point, orientation: Orientation) :
     companion object {
         const val ACCELERATION = .15
         const val MAX_SPEED = 3.0
-        val TURN_SPEED = Rotation.fromDegrees(1.0)
+        val TURN_SPEED = Rotation.fromDegrees(2.0)
     }
 }
