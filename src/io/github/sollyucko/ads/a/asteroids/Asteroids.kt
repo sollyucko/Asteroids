@@ -26,9 +26,10 @@ class Asteroids : GameCanvas("Asteroids!", 800, 600) {
         ),
         Orientation.RIGHT
     )
+    private val bullets = mutableListOf<Bullet>()
     private val enemy = Enemy()
+    private val enemyBullets = mutableListOf<Bullet>()
     private val asteroids = generateSequence { Asteroid.createRandom(this) }.take(NUM_ASTEROIDS).toMutableList()
-    private var bullets = mutableListOf<Bullet>()
     private var score: Int = 0
 
     init {
@@ -59,7 +60,7 @@ class Asteroids : GameCanvas("Asteroids!", 800, 600) {
                         asteroids.add(Asteroid.createRandomNear(asteroid.anchor, this, asteroid.size / 2.0))
                         asteroids.add(Asteroid.createRandomNear(asteroid.anchor, this, asteroid.size / 2.0))
                     } else {
-                        if(Random.nextInt(2) == 0) {
+                        if (Random.nextInt(2) == 0) {
                             asteroids.add(Asteroid.createRandomOnBorder(this))
                         }
                     }
@@ -71,6 +72,15 @@ class Asteroids : GameCanvas("Asteroids!", 800, 600) {
             bullet.paint(brush)
             true
         })
+
+        for (bullet in enemyBullets) {
+            if (collide(ship, bullet)) {
+                endGame(win = false)
+            }
+
+            bullet.tick(this)
+            bullet.paint(brush)
+        }
 
         for (asteroid in asteroids) {
             if (collide(ship, asteroid)) {
@@ -99,6 +109,13 @@ class Asteroids : GameCanvas("Asteroids!", 800, 600) {
     fun addBullet(bullet: Bullet) {
         bullets.add(bullet)
     }
+
+    fun addEnemyBullet(bullet: Bullet) {
+        enemyBullets.add(bullet)
+    }
+
+    fun getPlayerPosition(): Point =
+        ship.anchor
 
     companion object {
         const val NUM_ASTEROIDS = 20

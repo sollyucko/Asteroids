@@ -6,7 +6,8 @@ import io.github.sollyucko.ads.a.asteroids.utils.geometry.Point
 
 class Enemy : Circle(Point(RADIUS*2, RADIUS*2), RADIUS), GameEntity<Asteroids> {
     override fun tick(game: Asteroids) {
-        // TODO: fire bullets at player
+        val orientation = (game.getPlayerPosition() - anchor).orientation
+        game.addEnemyBullet(Bullet(center, orientation))
     }
 
     companion object {
