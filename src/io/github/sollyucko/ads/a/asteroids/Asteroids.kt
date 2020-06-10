@@ -26,6 +26,7 @@ class Asteroids : GameCanvas("Asteroids!", 800, 600) {
         ),
         Orientation.RIGHT
     )
+    private val enemy = Enemy()
     private val asteroids = generateSequence { Asteroid.createRandom(this) }.take(NUM_ASTEROIDS).toMutableList()
     private var bullets = mutableListOf<Bullet>()
     private var score: Int = 0
@@ -45,6 +46,9 @@ class Asteroids : GameCanvas("Asteroids!", 800, 600) {
 
         ship.tick(this)
         ship.paint(brush)
+
+        enemy.tick(this)
+        enemy.paint(brush)
 
         bullets.assign(bullets.filter { bullet ->
             for (asteroid in asteroids) {
