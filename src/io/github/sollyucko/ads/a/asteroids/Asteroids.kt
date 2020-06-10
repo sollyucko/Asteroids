@@ -142,8 +142,8 @@ class Asteroids : GameCanvas("Asteroids!", 800, 600) {
 fun main() {
     println("You control the spaceship in the middle of the screen.")
     println("Press space to shoot, left/right to turn, and up to move forwards.")
-    println("You win if you get rid of all the asteroids.")
-    println("You lose if an asteroid hits you.")
+    println("You win if you get rid of all the asteroids and the enemy (10 hits).")
+    println("You lose if you get hit 3 times.")
     sleep(1000)
     val a = Asteroids()
     a.repaint()
